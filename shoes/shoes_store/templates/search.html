@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<!-- new collection section start -->
+    <div class="layout_padding collection_section">
+    	<div class="container">
+    	    <h1 class="new_text"><strong>Search for {{search_str}}</strong></h1>
+    	    <div class="collection_section_2">
+    	    	<div class="row">
+    	    		{% for item in items %}
+						{% include 'item.html' with item=item %}
+					{% endfor %}
+    	    	</div>
+    	    </div>
+    	</div>
+		</div>
+	<!-- new collection section end -->
+{% endblock %}

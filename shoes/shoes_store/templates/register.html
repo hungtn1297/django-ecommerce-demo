@@ -1,0 +1,32 @@
+{% load static %}
+{% load myfilters %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/boostrap.css' %}">
+
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
+		<div class="login-form">
+				<form action="{% url 'register' %}" method="POST">
+					{% csrf_token %}
+					{% for field in form %}
+					<div class="group">
+						<label for="user" class="label">{{ field.label_tag }}</label>
+						{{ field|addClass:'input'}}
+					</div>
+					{% endfor %}
+					<div class="group">
+						<input type="submit" value="Register" class="button">
+					</div>
+					<div class="group">
+						<a href="{% url 'login' %}">
+							<input type="button" class="button" value="Login">
+						</a>
+					</div>
+				</form>
+		</div>
+	</div>
+</div>
+
+
+

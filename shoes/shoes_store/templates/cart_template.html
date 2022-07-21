@@ -1,0 +1,61 @@
+{% load mathfilters %}
+{% load myfilters %}
+<div class="layout_padding">
+    <div class="container">
+        {% if cart_item %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in cart_item %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.item_id.name }}</td>
+                    <td>{{ item.item_id.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.item_id.price|mul:item.quantity }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+            <div style="text-align: right; margin-right: 150px">
+                <p>
+                    <bold>Total: {{total}}</bold>
+                </p>
+                {% if not is_order %}
+                    <input type="button" class="btn btn-info" value="Payment" data-toggle="collapse" data-target="#payment_form">
+                {% endif %}
+            </div>
+            <div>
+                <div {% if not is_order %} class="collapse" {% endif %} id="payment_form">
+                    <form action="{% url 'payment' %}" method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.label_tag %}
+                            <div class="form-group">
+                                <label class="label">{{ field.label_tag }}</label>
+                                {{ field|addClass:'form-control'}}
+                            </div>
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
+                        {% endfor %}
+                        {% if not is_order %}
+                            <input type="submit" class="btn btn-warning" value="Submit">
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <p>There is nothing in your cart</p>
+        {% endif %}
+    </div>
+</div>

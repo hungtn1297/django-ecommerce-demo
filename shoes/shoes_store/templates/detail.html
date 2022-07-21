@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="about_main layout_padding">
+<div class="collection_section">
+    <div class="container">
+        <h1 class="new_text"><strong>{{ item.name }}</strong></h1>
+        <p class="consectetur_text">{{ item.description }}</p>
+    </div>
+</div>
+<div class="collectipn_section_3 layout_padding">
+    <div class="container">
+        <div class="racing_shoes">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="shoes-img3"><img src="{% static 'images/shoes-img3.png' %}"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="sale_text">{{ item.name }}</div>
+                    <div class="number_text"><strong>$ <span style="color: #0a0506">{{ item.price }}</span></strong></div>
+                    <button class="seemore">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
